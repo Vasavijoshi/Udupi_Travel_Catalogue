@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taluk Details</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1 id="taluk-title">Loading...</h1>
+        
+        <!-- Destinations Section -->
+        <section id="destinations-section">
+            <h2>Popular Destinations</h2>
+            <div id="destinations" class="grid-container"></div>
+        </section>
+
+        <!-- Food Section -->
+        <section id="food-section">
+            <h2>Local Cuisine</h2>
+            <div id="food-container" class="grid-container"></div>
+        </section>
+
+        <!-- Accommodation Section -->
+        <section id="accommodation-section">
+            <h2>Places to Stay</h2>
+            <div id="accommodation-container" class="grid-container"></div>
+        </section>
+
+        <!-- Experiences Section -->
+        <section id="experiences-section">
+            <h2>Local Experiences</h2>
+            <div id="experience-container" class="grid-container"></div>
+        </section>
+
+        <!-- Transport Section -->
+        <section id="transport-section">
+            <h2>Transportation Options</h2>
+            <div id="transport-container" class="grid-container"></div>
+        </section>
+    </div>
+
+    <script>
+        // Get taluk name from URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const talukName = urlParams.get('name');
+
+        if (!talukName) {
+            document.getElementById('taluk-title').textContent = 'Error: No taluk specified';
+        } else {
+            document.getElementById('taluk-title').textContent = talukName + ' Taluk';
+
+            // Load data for this taluk
+            fetch(`api/getDestinations.php?taluk=${talukName}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        updateDestinationsUI(data.data);
+                    }
+                })
+                .catch(error => console.error('Error loading destinations:', error));
+
+            fetch(`api/getFood.php?taluk=${talukName}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        updateFoodUI(data.data);
+                    }
+                })
+                .catch(error => console.error('Error loading food:', error));
+
+            fetch(`api/getAccommodation.php?taluk=${talukName}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        updateAccommodationUI(data.data);
+                    }
+                })
+                .catch(error => console.error('Error loading accommodation:', error));
+
+            fetch(`api/getExperiences.php?taluk=${talukName}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        updateExperiencesUI(data.data);
+                    }
+                })
+                .catch(error => console.error('Error loading experiences:', error));
+
+            fetch(`api/getTransport.php?taluk=${talukName}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        updateTransportUI(data.data);
+                    }
+                })
+                .catch(error => console.error('Error loading transport:', error));
+        }
+
+        // UI Update Functions
+        function updateDestinationsUI(destinations) {
+            const container = document.getElementById('destinations');
+            container.innerHTML = destinations.map(dest => `
+                <div class="card">
+                    <h3>${dest.Name}</h3>
+                    <p>${dest.Description}</p>
+                    <p>Entry Fee: ₹${dest.EntryFee || 'Free'}</p>
+                    <p>Timings: ${dest.OpeningTime || 'N/A'} - ${dest.ClosingTime || 'N/A'}</p>
+                </div>
+            `).join('');
+        }
+
+        function updateFoodUI(foodItems) {
+            const container = document.getElementById('food-container');
+            container.innerHTML = foodItems.map(food => `
+                <div class="card">
+                    <h3>${food.Name}</h3>
+                    <p>${food.Description}</p>
+                    <p>Price Range: ${food.PriceRange}</p>
+                </div>
+            `).join('');
+        }
+
+        function updateAccommodationUI(accommodations) {
+            const container = document.getElementById('accommodation-container');
+            container.innerHTML = accommodations.map(acc => `
+                <div class="card">
+                    <h3>${acc.Name}</h3>
+                    <p>${acc.Description}</p>
+                    <p>Price Range: ${acc.PriceRange}</p>
+                    <p>Rating: ${acc.Rating}/5</p>
+                </div>
+            `).join('');
+        }
+
+        function updateExperiencesUI(experiences) {
+            const container = document.getElementById('experience-container');
+            container.innerHTML = experiences.map(exp => `
+                <div class="card">
+                    <h3>${exp.Name}</h3>
+                    <p>${exp.Description}</p>
+                    <p>Duration: ${exp.Duration}</p>
+                    <p>Price: ₹${exp.Price}</p>
+                </div>
+            `).join('');
+        }
+
+        function updateTransportUI(transport) {
+            const container = document.getElementById('transport-container');
+            container.innerHTML = transport.map(trans => `
+                <div class="card">
+                    <h3>${trans.Type}</h3>
+                    <p>${trans.Description}</p>
+                    <p>Cost: ₹${trans.Cost}</p>
+                    <p>Schedule: ${trans.Schedule || 'Available on demand'}</p>
+                </div>
+            `).join('');
+        }
+    </script>
+</body>
+</html> 
