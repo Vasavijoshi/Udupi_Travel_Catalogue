@@ -7,7 +7,7 @@ ini_set('display_errors', 1);
 $db_config = [
     'host' => 'localhost',
     'username' => 'root',
-    'password' => 'NNM23CC070', 
+    'password' => '',
     'database' => 'udupi'
 ];
 

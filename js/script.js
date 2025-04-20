@@ -9,7 +9,7 @@ const travelData = {
 
 // Configuration for API endpoints
 const API_CONFIG = {
-  baseUrl: 'http://localhost/pacific-main/',  // Base URL for API endpoints
+  baseUrl: 'http://localhost:7886/Udupi_Travel_Catalogue/',  // Base URL for API endpoints
   endpoints: {
     destinations: 'api/destinations.php',
     food: 'api/food.php',
@@ -32,7 +32,7 @@ function fetchData(category, params = {}) {
   }
 
   const url = new URL(API_CONFIG.endpoints[category], API_CONFIG.baseUrl);
-  
+
   // Add query parameters if provided
   Object.keys(params).forEach(key => {
     url.searchParams.append(key, params[key]);
@@ -70,7 +70,7 @@ function fetchData(category, params = {}) {
  */
 function fetchDestinations(destinationId = null) {
   const params = destinationId ? { id: destinationId } : {};
-  
+
   return fetchData('destinations', params)
     .then(destinations => {
       console.log('Destinations loaded:', destinations);
@@ -172,14 +172,14 @@ function loadDestinationDetails(destinationId) {
     if (container) {
       // Clear existing content first
       container.innerHTML = '';
-      
+
       const loadingIndicator = document.createElement('div');
       loadingIndicator.className = 'loading-indicator text-center mb-4';
       loadingIndicator.innerHTML = '<div class="spinner-border text-primary" role="status"></div><div class="mt-2">Loading...</div>';
       container.appendChild(loadingIndicator);
     }
   });
-  
+
   // Fetch all types of data for this destination
   Promise.all([
     fetchDestinations(destinationId),
@@ -205,7 +205,7 @@ function updateDestinationsUI(destinations) {
   if (!destinationContainer) return;
 
   destinationContainer.innerHTML = '';
-  
+
   destinations.forEach(destination => {
     const destinationCard = createDestinationCard(destination);
     destinationContainer.appendChild(destinationCard);
@@ -220,7 +220,7 @@ function updateDestinationsUI(destinations) {
 function createDestinationCard(destination) {
   const card = document.createElement('div');
   card.className = 'destination-card';
-  
+
   // Format time if available
   const formatTime = (time) => {
     if (!time) return '';
@@ -232,7 +232,7 @@ function createDestinationCard(destination) {
     if (!price) return 'Free';
     return `₹${parseFloat(price).toFixed(2)}`;
   };
-  
+
   // Create card content based on destination data
   card.innerHTML = `
     <div class="img" style="background-image: url(${destination.image || ''});">
@@ -251,7 +251,7 @@ function createDestinationCard(destination) {
       </div>
     </div>
   `;
-  
+
   // Add event listener for the view details button
   const viewDetailsBtn = card.querySelector('.view-details');
   viewDetailsBtn.addEventListener('click', () => {
@@ -262,7 +262,7 @@ function createDestinationCard(destination) {
       showErrorMessage('Cannot load destination details: No ID available');
     }
   });
-  
+
   return card;
 }
 
@@ -275,11 +275,11 @@ function updateFoodUI(foodData) {
   if (!foodContainer) return;
 
   foodContainer.innerHTML = '';
-  
+
   foodData.forEach(food => {
     const foodCard = document.createElement('div');
     foodCard.className = 'food-card';
-    
+
     foodCard.innerHTML = `
       <div class="img" style="background-image: url(${food.image || ''});">
         <div class="text">
@@ -289,7 +289,7 @@ function updateFoodUI(foodData) {
         </div>
       </div>
     `;
-    
+
     foodContainer.appendChild(foodCard);
   });
 }
@@ -303,11 +303,11 @@ function updateAccommodationUI(accommodationData) {
   if (!accommodationContainer) return;
 
   accommodationContainer.innerHTML = '';
-  
+
   accommodationData.forEach(accommodation => {
     const accommodationCard = document.createElement('div');
     accommodationCard.className = 'accommodation-card';
-    
+
     accommodationCard.innerHTML = `
       <div class="img" style="background-image: url(${accommodation.image || ''});">
         <div class="text">
@@ -318,7 +318,7 @@ function updateAccommodationUI(accommodationData) {
         </div>
       </div>
     `;
-    
+
     accommodationContainer.appendChild(accommodationCard);
   });
 }
@@ -332,11 +332,11 @@ function updateLocalExperienceUI(experienceData) {
   if (!experienceContainer) return;
 
   experienceContainer.innerHTML = '';
-  
+
   experienceData.forEach(experience => {
     const experienceCard = document.createElement('div');
     experienceCard.className = 'experience-card';
-    
+
     experienceCard.innerHTML = `
       <div class="img" style="background-image: url(${experience.image});">
         <div class="text">
@@ -347,7 +347,7 @@ function updateLocalExperienceUI(experienceData) {
         </div>
       </div>
     `;
-    
+
     experienceContainer.appendChild(experienceCard);
   });
 }
@@ -361,11 +361,11 @@ function updateTransportUI(transportData) {
   if (!transportContainer) return;
 
   transportContainer.innerHTML = '';
-  
+
   transportData.forEach(transport => {
     const transportCard = document.createElement('div');
     transportCard.className = 'transport-card';
-    
+
     transportCard.innerHTML = `
       <div class="transport-item">
         <h3>${transport.type}</h3>
@@ -374,7 +374,7 @@ function updateTransportUI(transportData) {
         <p>Schedule: ${transport.schedule || 'Available on demand'}</p>
       </div>
     `;
-    
+
     transportContainer.appendChild(transportCard);
   });
 }
@@ -385,10 +385,10 @@ function updateTransportUI(transportData) {
  */
 function showErrorMessage(message) {
   const errorContainer = document.getElementById('error-container') || createErrorContainer();
-  
+
   errorContainer.textContent = message;
   errorContainer.classList.add('show');
-  
+
   // Hide error after 5 seconds
   setTimeout(() => {
     errorContainer.classList.remove('show');

@@ -29,19 +29,12 @@ try {
         throw new Exception("Error creating table: " . $conn->error);
     }
     
-    $sql = "SELECT 
-        FoodID as id,
-        FoodName as name,
-        FoodDescription as description,
-        PriceRange as priceRange,
-        Image as image,
-        DestinationID as destinationId
-    FROM Food";
+    $sql = "SELECT FoodID as id,FoodName as name FROM food";
     
     // If specific destination ID is requested
     if (isset($_GET['destination'])) {
-        $destinationId = $conn->real_escape_string($_GET['destination']);
-        $sql .= " WHERE DestinationID = '$destinationId'";
+//        $destinationId = $conn->real_escape_string($_GET['destination']);
+//        $sql .= " WHERE DestinationID = '$destinationId'";
     }
     
     $result = $conn->query($sql);

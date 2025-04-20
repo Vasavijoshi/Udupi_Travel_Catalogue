@@ -32,18 +32,17 @@ try {
     
     $sql = "SELECT 
         AccommodationID as id,
-        AccommodationName as name,
-        AccommodationDescription as description,
+        Name as name,
+        Location as description,
         PriceRange as priceRange,
         Rating as rating,
-        Image as image,
-        DestinationID as destinationId
+        TalukID as destinationId
     FROM Accommodation";
     
     // If specific destination ID is requested
     if (isset($_GET['destination'])) {
         $destinationId = $conn->real_escape_string($_GET['destination']);
-        $sql .= " WHERE DestinationID = '$destinationId'";
+        $sql .= " WHERE TalukID = '$destinationId'";
     }
     
     $result = $conn->query($sql);
