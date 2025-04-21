@@ -34,11 +34,11 @@ try {
         e.ExperienceID as id,
         e.Name as name,
         e.Description as description,
-        e.Duration as duration,
+        e.Timings as duration,
+        e.Rating as rating,
         e.Price as price,
-        e.Image as image,
-        e.DestinationID as destinationId
-    FROM LocalExperience e";
+        e.TalukID as destinationId
+    FROM localexperiences e";
     
     // If specific destination ID is requested
     if (isset($_GET['destination'])) {

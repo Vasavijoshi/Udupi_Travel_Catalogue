@@ -1,65 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Explore - Udupi</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  
-  <!--<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Arizonia&display=swap" rel="stylesheet">-->
+    <title>Explore - Udupi</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!--<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Arizonia&display=swap" rel="stylesheet">-->
 
-  <link rel="stylesheet" href="css/animate.css">
-  
-  <link rel="stylesheet" href="css/owl.carousel.min.css">
-  <link rel="stylesheet" href="css/owl.theme.default.min.css">
-  <link rel="stylesheet" href="css/magnific-popup.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-  <link rel="stylesheet" href="css/flaticon.css">
-  <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animate.css">
+
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+
+    <link rel="stylesheet" href="css/flaticon.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
- <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-   <div class="container">
-    <a class="navbar-brand" style="color: black;">UDUPI</a>
-   </div>
- </nav>
- <!-- END nav -->
- 
+<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+    <div class="container">
+        <a class="navbar-brand" style="color: black;">UDUPI</a>
+    </div>
+</nav>
+<!-- END nav -->
+
 
 <section class="ftco-section">
-  <!--<h1>Destinations</h1>/h1-->
-  <h2>Destination Details</h2>
-  <div id="destinations"></div>
-  <h2>Local Cuisine</h2>
-<div id="food-container"></div>
-<h2>Where to Stay</h2>
-<div id="accommodation-container"></div>
-<h2>Local Experiences</h2>
-<div id="experience-container"></div>
-<h2>Getting Around</h2>
-<div id="transport-container"></div>
+    <!--<h1>Destinations</h1>/h1-->
+    <h2>Destination Details</h2>
+    <div id="destinations"></div>
+    <h2>Local Cuisine</h2>
+    <div id="food-container"></div>
+    <h2>Where to Stay</h2>
+    <div id="accommodation-container"></div>
+    <h2>Local Experiences</h2>
+    <div id="experience-container"></div>
+    <h2>Getting Around</h2>
+    <div id="transport-container"></div>
 </section>
 
-<footer class="ftco-footer bg-bottom ftco-no-pt" >
+<footer class="ftco-footer bg-bottom ftco-no-pt">
     <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-      <div style="text-align: center;">
-        Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Destiny</a>
-      </div></div>
-      <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+    <div style="text-align: center;">
+        Copyright &copy;<script>document.write(new Date().getFullYear());</script>
+        All rights reserved | This is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a
+            href="https://colorlib.com" target="_blank">Destiny</a>
+    </div>
+    </div>
+    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
 </footer>
 <!-- loader -->
-<div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+<div id="ftco-loader" class="show fullscreen">
+    <svg class="circular" width="48px" height="48px">
+        <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/>
+        <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
+                stroke="#F96D00"/>
+    </svg>
+</div>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    // Load all destinations initially
-    fetchDestinations();
-    
-    // If you want to load a specific destination immediately:
-    // loadDestinationDetails('udupi-main'); // Replace with your destination ID
-  });
+    document.addEventListener('DOMContentLoaded', function () {
+        // Load all destinations initially
+        // fetchDestinations();
+
+        // If you want to load a specific destination immediately:
+        loadDestinationDetails('1'); // Replace with your destination ID
+
+    });
 </script>
 
 <script src="js/jquery.min.js"></script>

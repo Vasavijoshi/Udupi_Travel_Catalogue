@@ -2,7 +2,7 @@
 $host = 'localhost';
 $username = 'root';
 $password = '';
-$database = 'pacific_travel';
+$database = 'travel_catalogue';
 
 // Create connection
 $conn = new mysqli($host, $username, $password, $database);

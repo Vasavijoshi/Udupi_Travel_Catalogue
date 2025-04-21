@@ -1,10 +1,4 @@
 <?php
-// Enable error reporting for debugging
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-ini_set('log_errors', 1);
-ini_set('error_log', 'php_errors.log');
-
 // Ensure clean output
 ob_clean();
 
@@ -17,10 +11,9 @@ header('Content-Type: application/json');
 try {
     // Log connection attempt
     error_log("Attempting MySQL connection...");
-    
-    // First test direct MySQL connection with error suppression
-    $conn = @new mysqli('localhost', 'root', '');
-    
+
+    $conn = @new mysqli('localhost', 'root', '', 'travel_catalogue');
+
     if ($conn->connect_error) {
         // If connection fails, return empty data with 200 status
         echo json_encode([
@@ -30,9 +23,9 @@ try {
         ]);
         exit;
     }
-    
+
     error_log("MySQL connected successfully");
-    
+
     // Try to select/create database
     if (!$conn->query("CREATE DATABASE IF NOT EXISTS udupi")) {
         echo json_encode([
@@ -112,7 +105,7 @@ try {
     
     if (isset($_GET['id'])) {
         $id = $conn->real_escape_string($_GET['id']);
-        $sql .= " WHERE d.DestinationID = '$id'";
+        $sql .= " WHERE d.TalukId = '$id'";
     }
     
     $result = $conn->query($sql);
@@ -130,11 +123,11 @@ try {
     while ($row = $result->fetch_assoc()) {
         $destinations[] = $row;
     }
-    
+
     echo json_encode([
         'success' => true,
         'data' => $destinations,
-        'message' => count($destinations) > 0 ? 'Destinations retrieved successfully' : 'No destinations found'
+        'message' => count($destinations) > 0 ? 'Destinations retrieved successfully' : 'No destinations found 2'
     ]);
     
 } catch (Exception $e) {
@@ -144,7 +137,7 @@ try {
     echo json_encode([
         'success' => true,
         'data' => [],
-        'message' => 'Service temporarily unavailable'
+        'message' => $e->getMessage()
     ]);
 }
 

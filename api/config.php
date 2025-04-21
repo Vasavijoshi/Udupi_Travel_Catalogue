@@ -8,7 +8,8 @@ $db_config = [
     'host' => 'localhost',
     'username' => 'root',
     'password' => '',
-    'database' => 'udupi'
+    'database' => 'travel_catalogue',
+    'port' => '3306'
 ];
 
 // Function to establish database connection
@@ -20,7 +21,9 @@ function connectDB() {
         $conn = new mysqli(
             $db_config['host'],
             $db_config['username'],
-            $db_config['password']
+            $db_config['password'],
+            $db_config['database'],
+            $db_config['port']
         );
         
         // Check connection
